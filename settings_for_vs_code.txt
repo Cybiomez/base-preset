@@ -1,0 +1,135 @@
+1) Установить VS Code
+    - Включить автосохранение
+2) Установить плагины:
+    - Live Server
+    - Auto Rename Tag
+    - W3C Web Validator
+    - Prettier
+    - Stilelint
+    По желанию:
+    - Post CSS Sorting
+    - EditorConfig
+    - Scroll Viewport
+3) Установить GitBash:
+    1. Создать папку для проектов в C:\Users\User 
+    2. Задать глобальное имя пользователя
+        git config --global user.name "User Name" 
+    3. Задать почту пользователя
+        git config --global user.email "username@yandex.ru"
+    4. Проверяем заданные настройки
+        git config --list
+4) Сгенерировать SSH-ключи:
+    1. Перейти в основной репозиторий
+        cd ~
+    2. Проверить наличие ключей и удалить их
+        -ls -la .ssh/
+    3. Сгенерировать ключ
+        ssh-keygen -t ed25519 -C "username@yandex.ru"
+    ИЛИ
+        ssh-keygen -t rsa -b 4096 -C "username@yandex.ru"
+    4. Enter, Создаем пароль х2
+    5. Запустить агента-ssh:
+        eval $(ssh-agent -s)
+    6. Привязать ключ к агенту (по желанию):
+        # для ed25519: ssh-add ~/.ssh/id_ed25519
+        # для rsa: ssh-add ~/.ssh/id_rsa
+    7. Скопировать приватный ключ:
+        # для ed25519: clip < ~/.ssh/id_ed25519.pub
+        # для rsa: clip < ~/.ssh/id_rsa.pub
+    8. Перейти на GitHub, зайти в Settings
+        Выбрать пункт SSH and GPG keys
+        Нажать "New SSH key or Add SSH key"
+        Задать название и вставить ключ в "key"
+        Сохранить
+5) Связать локальный репозиторий:
+    1. Зайти в профиль на GitHub
+    2. Создать репозиторий
+        Задать имя, видимость, создать readme.md
+    3. Выбрать SSH ссылку
+    4. Инициализировать репозиторий
+        git init
+    5. Связать репозиторий
+        git remote add origin git@github.com:username/project.git 
+    6. На всякий случай переименовать ветку
+        git branch -M main 
+    7. Залогиниться в VS Code и запушить репозиторий
+6) Установить Node.js и npm:
+    1. Установить Node.js LTS
+        https://nodejs.org
+    2. Проверить в терминале версии node -v и npm -v
+    3. Создать тестовый проект для хранения настроек
+    4. Инициализировать npm в тестовом проекте
+        npm init
+    5. Клонировать репозиторий с пресетами:
+        git clone https://github.com/Cybiomez/base_presets.git
+    ИЛИ
+        Установить необходимые зависимости:
+            npm i prettier --save-dev
+            npm i stylelint --save-dev
+            npm i normalize.css
+    6. Забрать репозиторий себе (по желанию)
+        Создать свой репозиторий на GitHub
+            git remote set-url origin git@github.com:username/base_presets.git
+    7. Скопировать пресет из
+        base_presets/settings_for_new_project
+    8. Создать файл .gitignote со строкой node_modules/
+7) Настроить Post CSS Sorting:
+    1. Открыть Settings
+    2. Найти Post CSS Sorting Config и открыть settings.json
+    3. Вставить часть в "postcssSorting.config" код из файла
+        settings_for_postcss_sorting.json
+    4. При нажатии F1 в файле .css выбрать сортировку PostCSS
+8) Настроить EditorConfig:
+    1. В корене проекта создать файл
+        .editorconfig
+    2. Поместить в него следующие настройки:
+        root = true
+        [*]
+        indent_style = space
+        indent_size = 2
+        end_of_line = lf
+        charset = utf-8
+        trim_trailing_whitespace = true
+        insert_final_newline = true
+9) Настроить Prettier
+    1. Создать файл .prettierrc
+    2. Вставить конфиг
+        {
+            "trailingComma": "es5",
+            "tabWidth": 2,
+            "semi": true,
+            "singleQuote": true
+        }
+10) Настроить Stilelint
+    1. Создать файл stylelint.config.js
+    2. Вставить конфиг
+        module.exports = {
+            rules: {
+                'color-no-invalid-hex': true,
+                'value-keyword-case': ['lower', { camelCaseSvgKeywords: true }],
+                'property-no-unknown': true,
+                'declaration-block-no-duplicate-properties': true,
+                'declaration-block-no-shorthand-property-overrides': true,
+                'media-feature-name-no-unknown': true,
+                'comment-no-empty': true,
+                'no-descending-specificity': true,
+                'no-duplicate-selectors': true,
+                'no-invalid-position-at-import-rule': true,
+                'alpha-value-notation': 'number',
+                'color-function-notation': 'modern',
+                'color-hex-length': 'short',
+                'length-zero-no-unit': true,
+                'font-family-name-quotes': 'always-where-required',
+                'function-url-quotes': 'never',
+                'import-notation': 'url',
+                'shorthand-property-no-redundant-values': true,
+                'declaration-no-important': true,
+                'declaration-block-single-line-max-declarations': 1,
+                'no-unknown-animations': true,
+                'selector-type-case': 'lower',
+                'rule-empty-line-before': 'always',
+                'at-rule-empty-line-before': 'always',
+                'selector-class-pattern': null,
+                'font-family-name-quotes': 'always-where-recommended',
+            },
+        };
